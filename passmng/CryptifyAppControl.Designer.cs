@@ -29,17 +29,42 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CryptifyAppControl));
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            buttonAddAccount = new Button();
             pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel1.Location = new Point(221, 81);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(982, 613);
+            flowLayoutPanel1.TabIndex = 0;
+            flowLayoutPanel1.WrapContents = false;
+            // 
+            // buttonAddAccount
+            // 
+            buttonAddAccount.BackColor = Color.FromArgb(31, 31, 31);
+            buttonAddAccount.BackgroundImageLayout = ImageLayout.None;
+            buttonAddAccount.FlatStyle = FlatStyle.Flat;
+            buttonAddAccount.ForeColor = Color.FromArgb(31, 31, 31);
+            buttonAddAccount.Image = (Image)resources.GetObject("buttonAddAccount.Image");
+            buttonAddAccount.Location = new Point(1138, 3);
+            buttonAddAccount.Name = "buttonAddAccount";
+            buttonAddAccount.Size = new Size(65, 58);
+            buttonAddAccount.TabIndex = 1;
+            buttonAddAccount.UseVisualStyleBackColor = false;
+            buttonAddAccount.Click += buttonAddAccount_Click;
+            // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(279, 96);
+            pictureBox2.Location = new Point(-11, -52);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(406, 239);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.Size = new Size(226, 198);
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
             // 
@@ -47,8 +72,10 @@
             // 
             BackColor = Color.FromArgb(31, 31, 31);
             Controls.Add(pictureBox2);
+            Controls.Add(buttonAddAccount);
+            Controls.Add(flowLayoutPanel1);
             Name = "CryptifyAppControl";
-            Size = new Size(1079, 691);
+            Size = new Size(1207, 691);
             Load += CryptifyAppControl_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
@@ -61,8 +88,9 @@
         private TextBox textBox1;
         private Label labelCapsLock;
         private TextBox textBox2;
-        private Button button1;
+        private Button buttonAddAccount;
         private Button button2;
+        private FlowLayoutPanel flowLayoutPanel1;
         private PictureBox pictureBox2;
     }
 }

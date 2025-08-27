@@ -41,7 +41,24 @@ namespace passmng
                 username TEXT NOT NULL UNIQUE,
                 passHashed TEXT NOT NULL
                 );";
+
+                string tableCmdAccounts = @"
+                CREATE TABLE IF NOT EXISTS Accounts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                userId INTEGER NOT NULL,
+                accountName TEXT NOT NULL,
+                username TEXT NOT NULL,
+                password TEXT NOT NULL,
+                FOREIGN KEY(userId) REFERENCES Users(id) ON DELETE CASCADE
+                );";
+
+
                 using (var cmd = new SQLiteCommand(tableCmd, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+
+                using (var cmd = new SQLiteCommand(tableCmdAccounts, conn))
                 {
                     cmd.ExecuteNonQuery();
                 }
@@ -78,7 +95,7 @@ namespace passmng
             }
         }
 
-        private bool ValidateUser(string username, string password)
+        private int? GetUserId(string username, string password)
         {
             string passHashed = HashPassword(password);
             string dbFile = "users.db";
@@ -86,14 +103,21 @@ namespace passmng
             using (var conn = new SQLiteConnection($"Data Source={dbFile};Version=3;"))
             {
                 conn.Open();
-                string selectCmd = "SELECT COUNT(*) FROM Users WHERE username = @username AND passHashed = @passHashed;";
+                string selectCmd = "SELECT id FROM Users WHERE username = @username AND passHashed = @passHashed;";
 
                 using (var cmd = new SQLiteCommand(selectCmd, conn))
                 {
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@passHashed", passHashed);
-                    long count = (long)(cmd.ExecuteScalar());
-                    return count > 0;
+                    var result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
         }
@@ -113,17 +137,14 @@ namespace passmng
         {
             string username = textBox1.Text;
             string password = textBox2.Text;
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-            {
-                MessageBox.Show("Please enter both a username and password.");
-                return;
-            }
-            if (ValidateUser(username, password))
+
+            var userId = GetUserId(username, password);
+            if (userId.HasValue)
             {
                 MessageBox.Show("Login successful!");
-                SecureString pwd = GetSecurePassword();
-                LoginSucceeded?.Invoke(pwd);
-                password = String.Empty;
+                Session.CurrentUserId = userId.Value;
+                Session.masterPassword = GetSecurePassword();
+                LoginSucceeded?.Invoke(GetSecurePassword());
             }
             else
             {

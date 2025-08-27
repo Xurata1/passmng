@@ -1,3 +1,4 @@
+using System.Data.SQLite;
 using System.Security;
 
 namespace passmng
@@ -31,5 +32,7 @@ namespace passmng
             cryptifyApp.Dock = DockStyle.Fill;
             LoadScreen(cryptifyApp);
         }
+
+
     }
 }

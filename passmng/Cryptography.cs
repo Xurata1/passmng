@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Security;
 
 namespace passmng
 {
@@ -140,6 +141,16 @@ namespace passmng
             for (int i = 0; i < x.Length; i++)
                 diff |= x[i] ^ y[i];
             return diff == 0;
+        }
+
+        public static string SecureStringToString(SecureString s)
+        {
+            IntPtr ptr = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(s);
+            try { return System.Runtime.InteropServices.Marshal.PtrToStringBSTR(ptr); }
+            finally
+            {
+                System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(ptr);
+            }
         }
     }
 }
