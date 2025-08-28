@@ -11,32 +11,33 @@ namespace passmng
     public static class DatabaseHelper
     {
 
-        public static List<(string AccountName, string Username, string Password)> LoadAccounts(int userId, string masterPassword)
+        public static List<(int Id, string AccountName, string Username, string Password)> LoadAccounts(int userId, string masterPassword)
         {
-            var accounts = new List<(string, string, string)>();
+            var accounts = new List<(int, string, string, string)>();
             string dbFile = "users.db";
 
             using (var conn = new SQLiteConnection($"Data Source={dbFile};Version=3;"))
             {
                 conn.Open();
                 string selectCmd = @"
-                SELECT accountName, username, password
-                FROM Accounts
-                WHERE userId = @userId;";
+            SELECT id, accountName, username, password
+            FROM Accounts
+            WHERE userId = @userId;";
 
                 using (var cmd = new SQLiteCommand(selectCmd, conn))
                 {
-                    cmd.Parameters.AddWithValue("@userId", userId); 
+                    cmd.Parameters.AddWithValue("@userId", userId);
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            string accountName = reader.GetString(0);
-                            string username = reader.GetString(1);
-                            string encrypted = reader.GetString(2);
+                            int id = reader.GetInt32(0);
+                            string accountName = reader.GetString(1);
+                            string username = reader.GetString(2);
+                            string encrypted = reader.GetString(3);
 
                             string decrypted = Cryptography.DecryptString(encrypted, masterPassword);
-                            accounts.Add((accountName, username, decrypted));
+                            accounts.Add((id, accountName, username, decrypted));
                         }
                     }
                 }
@@ -62,6 +63,31 @@ namespace passmng
                     cmd.Parameters.AddWithValue("@accountName", accountName);
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", encrypted);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public static void UpdateAccount(int accountId, string accountName, string username, string password, string masterPassword)
+        {
+            string encrypted = Cryptography.EncryptString(password, masterPassword);
+            string dbFile = "users.db";
+
+            using (var conn = new SQLiteConnection($"Data Source={dbFile};Version=3;"))
+            {
+                conn.Open();
+                string updateCmd = @"
+                UPDATE Accounts 
+                SET accountName = @accountName, username = @username, password = @password
+                WHERE id = @id;";
+
+                using (var cmd = new SQLiteCommand(updateCmd, conn))
+                {
+                    cmd.Parameters.AddWithValue("@accountName", accountName);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", encrypted);
+                    cmd.Parameters.AddWithValue("@id", accountId);
                     cmd.ExecuteNonQuery();
                 }
             }

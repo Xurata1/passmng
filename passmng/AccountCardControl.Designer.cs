@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.Cursor = Cursors.Hand;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountCardControl));
             pictureBox1 = new PictureBox();
             labelaccountName = new Label();
@@ -98,7 +99,7 @@
         }
 
         #endregion
-
+        
         private PictureBox pictureBox1;
         private Label labelaccountName;
         private Label labelUsername;

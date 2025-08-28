@@ -23,13 +23,15 @@ namespace passmng
 
 
 
-        public void LoadAccounts(List<(string accountName, string username, string password)> accounts)
+        public void LoadAccounts(List<(int accountId, string accountName, string username, string password)> accounts)
         {
             flowLayoutPanel1.Controls.Clear();
 
-            foreach (var acc in accounts)
+            foreach (var account in accounts)
             {
-                var card = new AccountCardControl(acc.accountName, acc.username, acc.password);
+                AccountCardControl card = new AccountCardControl(account.accountId, account.accountName, account.username, account.password);
+                card.AccountClicked += OnAccountCardClicked;
+
                 flowLayoutPanel1.Controls.Add(card);
             }
         }
@@ -55,7 +57,7 @@ namespace passmng
                     string master = Cryptography.SecureStringToString(Session.masterPassword);
                     DatabaseHelper.AddAccount(Session.CurrentUserId.Value, accountName, username, password, master);
 
-                    AccountCardControl newCard = new AccountCardControl(accountName, username, password);
+                    AccountCardControl newCard = new AccountCardControl(Session.CurrentUserId.Value, accountName, username, password);
                     LoadUserAccounts();
                 }
             }
@@ -73,10 +75,33 @@ namespace passmng
 
             foreach (var account in accounts)
             {
-                AccountCardControl card = new AccountCardControl(account.AccountName, account.Username, account.Password);
+                AccountCardControl card = new AccountCardControl(account.Id, account.AccountName, account.Username, account.Password);
+                card.AccountClicked += OnAccountCardClicked;
                 flowLayoutPanel1.Controls.Add(card);
             }
         }
+
+        private void OnAccountCardClicked(object sender, EventArgs e)
+        {
+            var card = sender as AccountCardControl;
+            if (card == null) return;
+
+            string master = Cryptography.SecureStringToString(Session.masterPassword);
+
+            using (var detailsForm = new AccountDetailsForm(card.AccountId, card.AccountName, card.Username, card.Password, master))
+            {
+                detailsForm.AccountUpdated += DetailsForm_AccountUpdated;
+                detailsForm.ShowDialog();
+                detailsForm.AccountUpdated -= DetailsForm_AccountUpdated;
+            }
+        }
+
+        
+        private void DetailsForm_AccountUpdated(object sender, EventArgs e)
+        {
+            LoadUserAccounts();
+        }
+
 
     }
 }

@@ -16,19 +16,23 @@ namespace passmng
         private string accountName;
         private string username;
         private string password;
+        private int accountId;
 
         public string AccountName { get { return accountName; } }
         public string Username { get { return username; } }
         public string Password { get { return password; } }
 
+        public int AccountId { get { return accountId; } }
+
         private bool isPasswordVisible = false;
 
-        public event Action<AccountCardControl> AccountClicked;
+        public event EventHandler AccountClicked;
 
-        public AccountCardControl(string accountName, string username, string password)
+        public AccountCardControl(int accountId, string accountName, string username, string password)
         {
             InitializeComponent();
 
+            this.accountId = accountId;
             this.accountName = accountName;
             this.username = username;
             this.password = password;
@@ -36,6 +40,8 @@ namespace passmng
             labelaccountName.Text = accountName;
             labelUsername.Text = username;
             labelPassword.Text = new string('•', password.Length);
+
+            MakeCardClickable();
         }
 
         private void RenameAccount(string newName)
@@ -50,9 +56,9 @@ namespace passmng
             labelaccountName.Text = newName;
         }
 
-        private void buttonAccountClick(object sender, EventArgs e)
+        private void AccountCardControl_Clicked(object sender, EventArgs e)
         {
-            AccountClicked?.Invoke(this);
+            AccountClicked?.Invoke(this, e);
         }
 
         
@@ -84,6 +90,28 @@ namespace passmng
         {
             
         }
+
+        private void MakeCardClickable()
+        {
+            AttachMouseClickRecursively(this);
+        }
+
+        private void AttachMouseClickRecursively(Control parent)
+        {
+            parent.MouseClick += Card_MouseClick;
+
+            foreach (Control c in parent.Controls)
+            {
+                AttachMouseClickRecursively(c);
+                c.Cursor = Cursors.Hand;  // show it's clickable
+            }
+        }
+
+        private void Card_MouseClick(object sender, MouseEventArgs e)
+        {
+            AccountClicked?.Invoke(this, EventArgs.Empty);
+        }
+
 
     }
 }
