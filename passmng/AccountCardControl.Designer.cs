@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Cursor = Cursors.Hand;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountCardControl));
             pictureBox1 = new PictureBox();
             labelaccountName = new Label();
@@ -90,8 +89,9 @@
             Controls.Add(labelUsername);
             Controls.Add(labelaccountName);
             Controls.Add(pictureBox1);
+            Cursor = Cursors.Hand;
             Name = "AccountCardControl";
-            Size = new Size(476, 91);
+            Size = new Size(473, 84);
             Load += AccountCardControl_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
@@ -99,7 +99,7 @@
         }
 
         #endregion
-        
+
         private PictureBox pictureBox1;
         private Label labelaccountName;
         private Label labelUsername;

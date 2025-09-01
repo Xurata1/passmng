@@ -26,6 +26,14 @@ namespace passmng
             screen.Dock = DockStyle.Fill;     
             panelContainer.Controls.Add(screen);
         }
+
+        public void ShowLoginPage()
+        {
+            var loginPage = new LoginPageControl();
+            loginPage.Dock = DockStyle.Fill;
+            loginPage.LoginSucceeded += OnLoginSucceeded;
+            LoadScreen(loginPage);
+        }
         private void OnLoginSucceeded(SecureString pwd)
         {
             var cryptifyApp = new CryptifyAppControl(pwd);
@@ -33,6 +41,12 @@ namespace passmng
             LoadScreen(cryptifyApp);
         }
 
+        public void LoadUserControl(UserControl control)
+        {
+            panelContainer.Controls.Clear();
+            control.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(control);
+        }
 
     }
 }

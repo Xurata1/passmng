@@ -48,7 +48,7 @@ namespace passmng
             labelCapsLock.AutoSize = true;
             labelCapsLock.Font = new System.Drawing.Font("Candara", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             labelCapsLock.ForeColor = Color.White;
-            labelCapsLock.Location = new Point(323, 368);
+            labelCapsLock.Location = new Point(362, 369);
             labelCapsLock.Name = "labelCapsLock";
             labelCapsLock.Size = new Size(209, 19);
             labelCapsLock.TabIndex = 3;
@@ -61,7 +61,7 @@ namespace passmng
             button1.BackColor = Color.White;
             button1.Font = new System.Drawing.Font("Candara", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.Black;
-            button1.Location = new Point(513, 401);
+            button1.Location = new Point(533, 440);
             button1.Name = "button1";
             button1.Size = new Size(104, 40);
             button1.TabIndex = 4;
@@ -72,7 +72,7 @@ namespace passmng
             // button2
             // 
             button2.BackColor = Color.White;
-            button2.Location = new Point(513, 460);
+            button2.Location = new Point(533, 508);
             button2.Name = "button2";
             button2.Size = new Size(104, 40);
             button2.TabIndex = 5;
@@ -84,7 +84,7 @@ namespace passmng
             // 
             textBox1.Font = new System.Drawing.Font("Candara", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox1.ForeColor = SystemColors.ControlDarkDark;
-            textBox1.Location = new Point(323, 264);
+            textBox1.Location = new Point(362, 266);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Email Address";
             textBox1.Size = new Size(500, 27);
@@ -94,7 +94,7 @@ namespace passmng
             // pictureBox1
             // 
             pictureBox1.Image = (System.Drawing.Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(323, 0);
+            pictureBox1.Location = new Point(362, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(500, 241);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -106,7 +106,7 @@ namespace passmng
             // 
             textBox2.Font = new System.Drawing.Font("Candara", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox2.ForeColor = SystemColors.ControlDarkDark;
-            textBox2.Location = new Point(323, 319);
+            textBox2.Location = new Point(362, 315);
             textBox2.Name = "textBox2";
             textBox2.PlaceholderText = "Password";
             textBox2.Size = new Size(500, 27);
@@ -124,7 +124,7 @@ namespace passmng
             Controls.Add(labelCapsLock);
             Font = new System.Drawing.Font("Candara", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Name = "LoginPageControl";
-            Size = new Size(1010, 578);
+            Size = new Size(1207, 632);
             Load += LoginPage_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

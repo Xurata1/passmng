@@ -11,7 +11,7 @@ namespace passmng
     public static class DatabaseHelper
     {
 
-        public static List<(int Id, string AccountName, string Username, string Password)> LoadAccounts(int userId, string masterPassword)
+        public static List<(int Id, string AccountName, string Username, string Password)> LoadAccounts(int userId, string masterPassword) 
         {
             var accounts = new List<(int, string, string, string)>();
             string dbFile = "users.db";
@@ -20,9 +20,9 @@ namespace passmng
             {
                 conn.Open();
                 string selectCmd = @"
-            SELECT id, accountName, username, password
-            FROM Accounts
-            WHERE userId = @userId;";
+                SELECT id, accountName, username, password
+                FROM Accounts
+                WHERE userId = @userId;";
 
                 using (var cmd = new SQLiteCommand(selectCmd, conn))
                 {

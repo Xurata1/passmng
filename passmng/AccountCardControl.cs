@@ -103,7 +103,7 @@ namespace passmng
             foreach (Control c in parent.Controls)
             {
                 AttachMouseClickRecursively(c);
-                c.Cursor = Cursors.Hand;  // show it's clickable
+                c.Cursor = Cursors.Hand;  
             }
         }
 

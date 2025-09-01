@@ -32,6 +32,8 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             buttonAddAccount = new Button();
             pictureBox2 = new PictureBox();
+            buttonHIBP = new Button();
+            buttonLogout = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
@@ -39,9 +41,9 @@
             // 
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(221, 81);
+            flowLayoutPanel1.Location = new Point(251, 81);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(982, 613);
+            flowLayoutPanel1.Size = new Size(952, 548);
             flowLayoutPanel1.TabIndex = 0;
             flowLayoutPanel1.WrapContents = false;
             // 
@@ -62,20 +64,47 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(-11, -52);
+            pictureBox2.Location = new Point(-23, -41);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(226, 198);
+            pictureBox2.Size = new Size(268, 246);
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
+            // 
+            // buttonHIBP
+            // 
+            buttonHIBP.FlatStyle = FlatStyle.Flat;
+            buttonHIBP.ForeColor = Color.FromArgb(31, 31, 31);
+            buttonHIBP.Image = (Image)resources.GetObject("buttonHIBP.Image");
+            buttonHIBP.Location = new Point(0, 233);
+            buttonHIBP.Name = "buttonHIBP";
+            buttonHIBP.Size = new Size(245, 125);
+            buttonHIBP.TabIndex = 0;
+            buttonHIBP.UseVisualStyleBackColor = true;
+            buttonHIBP.Click += buttonHIBP_Click;
+            // 
+            // buttonLogout
+            // 
+            buttonLogout.FlatStyle = FlatStyle.Flat;
+            buttonLogout.ForeColor = Color.FromArgb(31, 31, 31);
+            buttonLogout.Image = (Image)resources.GetObject("buttonLogout.Image");
+            buttonLogout.Location = new Point(3, 443);
+            buttonLogout.Name = "buttonLogout";
+            buttonLogout.Size = new Size(215, 186);
+            buttonLogout.TabIndex = 2;
+            buttonLogout.TabStop = false;
+            buttonLogout.UseVisualStyleBackColor = true;
+            buttonLogout.Click += buttonLogout_Click;
             // 
             // CryptifyAppControl
             // 
             BackColor = Color.FromArgb(31, 31, 31);
+            Controls.Add(buttonLogout);
+            Controls.Add(buttonHIBP);
             Controls.Add(pictureBox2);
             Controls.Add(buttonAddAccount);
             Controls.Add(flowLayoutPanel1);
             Name = "CryptifyAppControl";
-            Size = new Size(1207, 691);
+            Size = new Size(1207, 632);
             Load += CryptifyAppControl_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
@@ -92,5 +121,7 @@
         private Button button2;
         private FlowLayoutPanel flowLayoutPanel1;
         private PictureBox pictureBox2;
+        private Button buttonHIBP;
+        private Button buttonLogout;
     }
 }

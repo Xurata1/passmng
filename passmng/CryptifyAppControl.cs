@@ -96,13 +96,52 @@ namespace passmng
             }
         }
 
-        
+
         private void DetailsForm_AccountUpdated(object sender, EventArgs e)
         {
             LoadUserAccounts();
         }
 
+        private void buttonHIBP_Click(object sender, EventArgs e)
+        {
+            var hibpScreen = new PwnedCheckControl();
+            string master = Cryptography.SecureStringToString(Session.masterPassword);
+            var accounts = DatabaseHelper.LoadAccounts(Session.CurrentUserId.Value, master);
+            var accountsWithIds = accounts
+                .Select((acc, index) => (index, acc.AccountName, acc.Username, acc.Password))
+                .ToList();
 
+            hibpScreen.LoadAccounts(accountsWithIds);
+
+            var mainForm = this.FindForm() as MainForm;
+            mainForm?.LoadScreen(hibpScreen);
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            Session.CurrentUserId = null;
+
+            if (Session.masterPassword != null)
+            {
+                try { Session.masterPassword.Dispose();} catch {}
+                Session.masterPassword = null;
+            }
+
+          
+            flowLayoutPanel1.Controls.Clear();
+
+            
+            var main = this.FindForm() as MainForm;
+            if (main != null)
+            {
+                main.ShowLoginPage();
+            }
+            else
+            {
+                
+                this.Parent?.Controls.Remove(this);
+            }
+        }
     }
 }
 
