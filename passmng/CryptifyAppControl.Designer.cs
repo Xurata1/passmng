@@ -34,6 +34,7 @@
             pictureBox2 = new PictureBox();
             buttonHIBP = new Button();
             buttonLogout = new Button();
+            textBoxSearch = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
@@ -95,9 +96,19 @@
             buttonLogout.UseVisualStyleBackColor = true;
             buttonLogout.Click += buttonLogout_Click;
             // 
+            // textBoxSearch
+            // 
+            textBoxSearch.Location = new Point(807, 22);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.PlaceholderText = "🔎 Search ";
+            textBoxSearch.Size = new Size(292, 23);
+            textBoxSearch.TabIndex = 3;
+            textBoxSearch.TextChanged += textBoxSearch_TextChanged;
+            // 
             // CryptifyAppControl
             // 
             BackColor = Color.FromArgb(31, 31, 31);
+            Controls.Add(textBoxSearch);
             Controls.Add(buttonLogout);
             Controls.Add(buttonHIBP);
             Controls.Add(pictureBox2);
@@ -108,6 +119,7 @@
             Load += CryptifyAppControl_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -123,5 +135,6 @@
         private PictureBox pictureBox2;
         private Button buttonHIBP;
         private Button buttonLogout;
+        private TextBox textBoxSearch;
     }
 }
