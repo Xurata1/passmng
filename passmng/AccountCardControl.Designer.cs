@@ -49,18 +49,18 @@
             // labelaccountName
             // 
             labelaccountName.AutoSize = true;
-            labelaccountName.Font = new Font("Cascadia Code SemiBold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelaccountName.Font = new Font("Roboto", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelaccountName.ForeColor = SystemColors.Control;
             labelaccountName.Location = new Point(88, 0);
             labelaccountName.Name = "labelaccountName";
-            labelaccountName.Size = new Size(78, 25);
+            labelaccountName.Size = new Size(62, 23);
             labelaccountName.TabIndex = 1;
             labelaccountName.Text = "label1";
             labelaccountName.Click += labelaccountName_Click;
             // 
             // labelUsername
             // 
-            labelUsername.Font = new Font("Cascadia Code", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelUsername.Font = new Font("Roboto", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelUsername.ForeColor = SystemColors.Control;
             labelUsername.Location = new Point(88, 25);
             labelUsername.Name = "labelUsername";
@@ -72,19 +72,20 @@
             // 
             // labelPassword
             // 
-            labelPassword.Font = new Font("Cascadia Code", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelPassword.Font = new Font("Roboto", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelPassword.ForeColor = SystemColors.Control;
             labelPassword.Location = new Point(88, 62);
             labelPassword.Name = "labelPassword";
             labelPassword.Size = new Size(364, 37);
             labelPassword.TabIndex = 3;
             labelPassword.Text = "label1";
+            labelPassword.Click += labelPassword_Click;
             // 
             // AccountCardControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(31, 31, 31);
+            BackColor = Color.FromArgb(19, 22, 26);
             Controls.Add(labelPassword);
             Controls.Add(labelUsername);
             Controls.Add(labelaccountName);

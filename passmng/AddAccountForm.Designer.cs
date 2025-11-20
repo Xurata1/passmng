@@ -110,7 +110,7 @@
             // 
             buttonCancel.DialogResult = DialogResult.Cancel;
             buttonCancel.FlatStyle = FlatStyle.Flat;
-            buttonCancel.ForeColor = Color.FromArgb(31, 31, 31);
+            buttonCancel.ForeColor = Color.FromArgb(19, 22, 26);
             buttonCancel.Image = (Image)resources.GetObject("buttonCancel.Image");
             buttonCancel.Location = new Point(444, 360);
             buttonCancel.Name = "buttonCancel";
@@ -122,7 +122,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(31, 31, 31);
+            BackColor = Color.FromArgb(19, 22, 26);
             ClientSize = new Size(800, 450);
             Controls.Add(buttonCancel);
             Controls.Add(buttonOk);

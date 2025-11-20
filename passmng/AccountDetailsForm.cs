@@ -54,11 +54,20 @@ namespace passmng
 
             DatabaseHelper.UpdateAccount(accountId, newAccountName, newUsername, newPassword, masterPassword);
 
-            AccountUpdated?.Invoke(this, EventArgs.Empty); 
+            AccountUpdated?.Invoke(this, EventArgs.Empty);
             MessageBox.Show("Account updated!");
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-        
+
+        private void labelDetailsService_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelDetailsUsername_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

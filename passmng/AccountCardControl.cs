@@ -61,34 +61,34 @@ namespace passmng
             AccountClicked?.Invoke(this, e);
         }
 
-        
+
         private void buttonTogglePassword_Click(object sender, EventArgs e)
         {
             if (isPasswordVisible)
             {
-                labelPassword.Text = new string('•', password.Length); 
+                labelPassword.Text = new string('•', password.Length);
                 isPasswordVisible = false;
             }
             else
             {
-                labelPassword.Text = password; 
+                labelPassword.Text = password;
                 isPasswordVisible = true;
             }
         }
 
         private void labelaccountName_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void labelUsername_Click_3(object sender, EventArgs e)
         {
-            
+
         }
 
         private void AccountCardControl_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void MakeCardClickable()
@@ -103,7 +103,7 @@ namespace passmng
             foreach (Control c in parent.Controls)
             {
                 AttachMouseClickRecursively(c);
-                c.Cursor = Cursors.Hand;  
+                c.Cursor = Cursors.Hand;
             }
         }
 
@@ -112,6 +112,9 @@ namespace passmng
             AccountClicked?.Invoke(this, EventArgs.Empty);
         }
 
+        private void labelPassword_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
