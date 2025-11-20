@@ -92,6 +92,25 @@ namespace passmng
                 }
             }
         }
+
+        public static void DeleteAccount(int accountId)
+        {
+            string dbFile = "users.db";
+
+            using (var conn = new SQLiteConnection($"Data source={dbFile}; Version=3"))
+            {
+                conn.Open(); 
+
+                string deleteCmd = "DELETE FROM Accounts WHERE id = @id";
+
+                using (var cmd = new SQLiteCommand(deleteCmd, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", accountId);
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
     }
 }
 

@@ -37,6 +37,7 @@
             txtPassword = new TextBox();
             buttonTogglePassword = new Button();
             buttonDetailsSave = new Button();
+            buttonDelete = new Button();
             SuspendLayout();
             // 
             // labelDetailsService
@@ -114,12 +115,24 @@
             buttonDetailsSave.FlatStyle = FlatStyle.Flat;
             buttonDetailsSave.ForeColor = Color.FromArgb(19, 22, 26);
             buttonDetailsSave.Image = (Image)resources.GetObject("buttonDetailsSave.Image");
-            buttonDetailsSave.Location = new Point(258, 302);
+            buttonDetailsSave.Location = new Point(192, 310);
             buttonDetailsSave.Name = "buttonDetailsSave";
-            buttonDetailsSave.Size = new Size(166, 68);
+            buttonDetailsSave.Size = new Size(140, 53);
             buttonDetailsSave.TabIndex = 7;
             buttonDetailsSave.UseVisualStyleBackColor = true;
             buttonDetailsSave.Click += buttonDetailsSave_Click;
+            // 
+            // buttonDelete
+            // 
+            buttonDelete.FlatStyle = FlatStyle.Flat;
+            buttonDelete.ForeColor = Color.FromArgb(19, 22, 26);
+            buttonDelete.Image = (Image)resources.GetObject("buttonDelete.Image");
+            buttonDelete.Location = new Point(338, 296);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(214, 81);
+            buttonDelete.TabIndex = 8;
+            buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += buttonDelete_Click;
             // 
             // AccountDetailsForm
             // 
@@ -127,6 +140,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(19, 22, 26);
             ClientSize = new Size(656, 382);
+            Controls.Add(buttonDelete);
             Controls.Add(buttonDetailsSave);
             Controls.Add(buttonTogglePassword);
             Controls.Add(txtPassword);
@@ -152,5 +166,6 @@
         private TextBox txtPassword;
         private Button buttonTogglePassword;
         private Button buttonDetailsSave;
+        private Button buttonDelete;
     }
 }

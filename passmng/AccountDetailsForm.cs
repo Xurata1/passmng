@@ -69,5 +69,23 @@ namespace passmng
         {
 
         }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            var confirm = MessageBox.Show(
+            "Are you sure you want to delete this account?",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning
+            ) ;
+
+            if (confirm == DialogResult.Yes)
+            {
+                DatabaseHelper.DeleteAccount(accountId);
+                AccountUpdated?.Invoke(this, EventArgs.Empty);
+                MessageBox.Show("Account deleted.");
+                this.Close();
+            }
+        }
     }
 }

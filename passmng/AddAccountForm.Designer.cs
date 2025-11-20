@@ -100,7 +100,7 @@
             buttonOk.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonOk.ForeColor = Color.FromArgb(19, 22, 26);
             buttonOk.Image = (Image)resources.GetObject("buttonOk.Image");
-            buttonOk.Location = new Point(260, 348);
+            buttonOk.Location = new Point(254, 348);
             buttonOk.Name = "buttonOk";
             buttonOk.Size = new Size(142, 78);
             buttonOk.TabIndex = 6;
