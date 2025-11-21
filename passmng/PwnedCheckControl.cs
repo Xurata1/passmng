@@ -88,11 +88,11 @@ namespace passmng
 
                 if (breachCount > 0)
                 {
-                    labelResult.Text = $"⚠️ This password has been seen {breachCount} times in breaches!";
+                    labelResult.Text = $"This password has been seen {breachCount} times in breaches! Change your password now.";
                 }
                 else
                 {
-                    labelResult.Text = "✅ This password has not been found in any known breaches.";
+                    labelResult.Text = "This password has not been found in any known breaches.";
                 }
             }
         }

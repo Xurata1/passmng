@@ -46,7 +46,7 @@
             comboBoxAccounts.Font = new Font("Roboto", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBoxAccounts.ForeColor = Color.White;
             comboBoxAccounts.FormattingEnabled = true;
-            comboBoxAccounts.Location = new Point(124, 337);
+            comboBoxAccounts.Location = new Point(107, 401);
             comboBoxAccounts.Name = "comboBoxAccounts";
             comboBoxAccounts.Size = new Size(293, 26);
             comboBoxAccounts.TabIndex = 0;
@@ -58,7 +58,7 @@
             labelResult.AutoSize = true;
             labelResult.Font = new Font("Cascadia Code", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelResult.ForeColor = SystemColors.Control;
-            labelResult.Location = new Point(548, 337);
+            labelResult.Location = new Point(107, 301);
             labelResult.Name = "labelResult";
             labelResult.Size = new Size(456, 28);
             labelResult.TabIndex = 1;
@@ -70,7 +70,7 @@
             buttonCheck.FlatStyle = FlatStyle.Flat;
             buttonCheck.ForeColor = Color.FromArgb(19, 22, 26);
             buttonCheck.Image = (Image)resources.GetObject("buttonCheck.Image");
-            buttonCheck.Location = new Point(478, 435);
+            buttonCheck.Location = new Point(663, 259);
             buttonCheck.Name = "buttonCheck";
             buttonCheck.Size = new Size(160, 120);
             buttonCheck.TabIndex = 2;

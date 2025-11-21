@@ -49,8 +49,15 @@ namespace passmng
                 accountName TEXT NOT NULL,
                 username TEXT NOT NULL,
                 password TEXT NOT NULL,
+                tags TEXT DEFAULT '',
                 FOREIGN KEY(userId) REFERENCES Users(id) ON DELETE CASCADE
                 );";
+
+                using (var cmd = new SQLiteCommand("ALTER TABLE Accounts ADD COLUMN tags TEXT DEFAULT '';", conn))
+                {
+                    try { cmd.ExecuteNonQuery(); }
+                    catch {}
+                }
 
 
                 using (var cmd = new SQLiteCommand(tableCmd, conn))
@@ -148,7 +155,7 @@ namespace passmng
             }
             else
             {
-                MessageBox.Show("Invalid credentials.");
+                MessageBox.Show("Invalid credentials. Please re-enter.");
             }
 
         }
@@ -157,7 +164,6 @@ namespace passmng
         {
             string username = textBox1.Text;
             string password = textBox2.Text;
-            MessageBox.Show($"Username: '{textBox1.Text}', Password: '{textBox2.Text}'");
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please enter both a username and password.");
