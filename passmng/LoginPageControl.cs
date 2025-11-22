@@ -162,20 +162,9 @@ namespace passmng
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string username = textBox1.Text;
-            string password = textBox2.Text;
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-            {
-                MessageBox.Show("Please enter both a username and password.");
-                return;
-            }
-
-            else
-            {
-                string hashedPassword = HashPassword(password);
-                AddUserToDatabase(username, hashedPassword);
-                password = string.Empty;
-            }
+            var main = this.FindForm() as MainForm;
+            main?.ShowSignUpPage();
+            
         }
 
         private string HashPassword(string password)

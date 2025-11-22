@@ -11,16 +11,16 @@ namespace passmng
     public static class DatabaseHelper
     {
 
-        public static List<(int Id, string AccountName, string Username, string Password)> LoadAccounts(int userId, string masterPassword) 
+        public static List<(int Id, string AccountName, string Username, string Password, string Tags)> LoadAccounts(int userId, string masterPassword) 
         {
-            var accounts = new List<(int, string, string, string)>();
+            var accounts = new List<(int, string, string, string, string)>();
             string dbFile = "users.db";
 
             using (var conn = new SQLiteConnection($"Data Source={dbFile};Version=3;"))
             {
                 conn.Open();
                 string selectCmd = @"
-                SELECT id, accountName, username, password
+                SELECT id, accountName, username, password, tags
                 FROM Accounts
                 WHERE userId = @userId;";
 
@@ -35,9 +35,10 @@ namespace passmng
                             string accountName = reader.GetString(1);
                             string username = reader.GetString(2);
                             string encrypted = reader.GetString(3);
+                            string tags = reader.IsDBNull(4) ? "" : reader.GetString(4);
 
                             string decrypted = Cryptography.DecryptString(encrypted, masterPassword);
-                            accounts.Add((id, accountName, username, decrypted));
+                            accounts.Add((id, accountName, username, decrypted, tags));
                         }
                     }
                 }
@@ -46,7 +47,7 @@ namespace passmng
             return accounts;
         }
 
-        public static void AddAccount(int userId, string accountName, string username, string password, string masterPassword)
+        public static void AddAccount(int userId, string accountName, string username, string password, string tags, string masterPassword)
         {
             string encrypted = Cryptography.EncryptString(password, masterPassword);
             string dbFile = "users.db";
@@ -54,8 +55,8 @@ namespace passmng
             {
                 conn.Open();
                 string insertCmd = @"
-                INSERT INTO Accounts (userId, accountName, username, password)
-                VALUES (@userId, @accountName, @username, @password);";
+                INSERT INTO Accounts (userId, accountName, username, password, tags)
+                VALUES (@userId, @accountName, @username, @password, @tags);";
 
                 using (var cmd = new SQLiteCommand(insertCmd, conn))
                 {
@@ -63,13 +64,14 @@ namespace passmng
                     cmd.Parameters.AddWithValue("@accountName", accountName);
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", encrypted);
+                    cmd.Parameters.AddWithValue("@tags", tags);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
 
-        public static void UpdateAccount(int accountId, string accountName, string username, string password, string masterPassword)
+        public static void UpdateAccount(int accountId, string accountName, string username, string password, string tags, string masterPassword)
         {
             string encrypted = Cryptography.EncryptString(password, masterPassword);
             string dbFile = "users.db";
@@ -79,7 +81,7 @@ namespace passmng
                 conn.Open();
                 string updateCmd = @"
                 UPDATE Accounts 
-                SET accountName = @accountName, username = @username, password = @password
+                SET accountName = @accountName, username = @username, password = @password, tags = @tags
                 WHERE id = @id;";
 
                 using (var cmd = new SQLiteCommand(updateCmd, conn))
@@ -87,7 +89,9 @@ namespace passmng
                     cmd.Parameters.AddWithValue("@accountName", accountName);
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", encrypted);
+                    cmd.Parameters.AddWithValue("@tags", tags);
                     cmd.Parameters.AddWithValue("@id", accountId);
+                    
                     cmd.ExecuteNonQuery();
                 }
             }

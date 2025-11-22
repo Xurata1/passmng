@@ -46,7 +46,7 @@
             comboBoxAccounts.Font = new Font("Roboto", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBoxAccounts.ForeColor = Color.White;
             comboBoxAccounts.FormattingEnabled = true;
-            comboBoxAccounts.Location = new Point(107, 401);
+            comboBoxAccounts.Location = new Point(107, 427);
             comboBoxAccounts.Name = "comboBoxAccounts";
             comboBoxAccounts.Size = new Size(293, 26);
             comboBoxAccounts.TabIndex = 0;
@@ -58,7 +58,7 @@
             labelResult.AutoSize = true;
             labelResult.Font = new Font("Cascadia Code", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelResult.ForeColor = SystemColors.Control;
-            labelResult.Location = new Point(107, 301);
+            labelResult.Location = new Point(107, 298);
             labelResult.Name = "labelResult";
             labelResult.Size = new Size(456, 28);
             labelResult.TabIndex = 1;
@@ -70,7 +70,7 @@
             buttonCheck.FlatStyle = FlatStyle.Flat;
             buttonCheck.ForeColor = Color.FromArgb(19, 22, 26);
             buttonCheck.Image = (Image)resources.GetObject("buttonCheck.Image");
-            buttonCheck.Location = new Point(663, 259);
+            buttonCheck.Location = new Point(775, 379);
             buttonCheck.Name = "buttonCheck";
             buttonCheck.Size = new Size(160, 120);
             buttonCheck.TabIndex = 2;
@@ -90,7 +90,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(513, -75);
+            pictureBox2.Location = new Point(625, -88);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(310, 212);
             pictureBox2.TabIndex = 4;

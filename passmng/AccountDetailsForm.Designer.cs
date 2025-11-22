@@ -38,6 +38,7 @@
             buttonTogglePassword = new Button();
             buttonDetailsSave = new Button();
             buttonDelete = new Button();
+            comboBoxTags = new ComboBox();
             SuspendLayout();
             // 
             // labelDetailsService
@@ -45,7 +46,7 @@
             labelDetailsService.AutoSize = true;
             labelDetailsService.Font = new Font("Roboto SemiBold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelDetailsService.ForeColor = SystemColors.Control;
-            labelDetailsService.Location = new Point(63, 94);
+            labelDetailsService.Location = new Point(12, 88);
             labelDetailsService.Name = "labelDetailsService";
             labelDetailsService.Size = new Size(94, 29);
             labelDetailsService.TabIndex = 0;
@@ -55,7 +56,7 @@
             // txtAccountName
             // 
             txtAccountName.BackColor = SystemColors.HighlightText;
-            txtAccountName.Location = new Point(192, 94);
+            txtAccountName.Location = new Point(141, 96);
             txtAccountName.Name = "txtAccountName";
             txtAccountName.Size = new Size(312, 23);
             txtAccountName.TabIndex = 1;
@@ -65,7 +66,7 @@
             labelDetailsUsername.AutoSize = true;
             labelDetailsUsername.Font = new Font("Roboto SemiBold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelDetailsUsername.ForeColor = SystemColors.Control;
-            labelDetailsUsername.Location = new Point(63, 161);
+            labelDetailsUsername.Location = new Point(12, 161);
             labelDetailsUsername.Name = "labelDetailsUsername";
             labelDetailsUsername.Size = new Size(123, 29);
             labelDetailsUsername.TabIndex = 2;
@@ -74,7 +75,7 @@
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(192, 169);
+            txtUsername.Location = new Point(141, 169);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(312, 23);
             txtUsername.TabIndex = 3;
@@ -84,7 +85,7 @@
             labelDetailsPassword.AutoSize = true;
             labelDetailsPassword.Font = new Font("Roboto SemiBold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labelDetailsPassword.ForeColor = SystemColors.Control;
-            labelDetailsPassword.Location = new Point(63, 242);
+            labelDetailsPassword.Location = new Point(12, 240);
             labelDetailsPassword.Name = "labelDetailsPassword";
             labelDetailsPassword.Size = new Size(120, 29);
             labelDetailsPassword.TabIndex = 4;
@@ -92,7 +93,7 @@
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(192, 248);
+            txtPassword.Location = new Point(141, 246);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(312, 23);
             txtPassword.TabIndex = 5;
@@ -103,7 +104,7 @@
             buttonTogglePassword.FlatStyle = FlatStyle.Flat;
             buttonTogglePassword.ForeColor = Color.FromArgb(31, 31, 31);
             buttonTogglePassword.Image = (Image)resources.GetObject("buttonTogglePassword.Image");
-            buttonTogglePassword.Location = new Point(524, 238);
+            buttonTogglePassword.Location = new Point(492, 240);
             buttonTogglePassword.Name = "buttonTogglePassword";
             buttonTogglePassword.Size = new Size(72, 40);
             buttonTogglePassword.TabIndex = 6;
@@ -134,12 +135,21 @@
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += buttonDelete_Click;
             // 
+            // comboBoxTags
+            // 
+            comboBoxTags.FormattingEnabled = true;
+            comboBoxTags.Location = new Point(492, 96);
+            comboBoxTags.Name = "comboBoxTags";
+            comboBoxTags.Size = new Size(152, 23);
+            comboBoxTags.TabIndex = 9;
+            // 
             // AccountDetailsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(19, 22, 26);
-            ClientSize = new Size(656, 382);
+            ClientSize = new Size(655, 382);
+            Controls.Add(comboBoxTags);
             Controls.Add(buttonDelete);
             Controls.Add(buttonDetailsSave);
             Controls.Add(buttonTogglePassword);
@@ -167,5 +177,6 @@
         private Button buttonTogglePassword;
         private Button buttonDetailsSave;
         private Button buttonDelete;
+        private ComboBox comboBoxTags;
     }
 }

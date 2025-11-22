@@ -22,17 +22,19 @@ namespace passmng
             masterPassword = password;
         }
 
+        private string tags;
+        public string Tags { get { return tags; } }
 
-        private List<(int Id, string AccountName, string Username, string Password)> allAccounts = new List<(int, string, string, string)>();
+        private List<(int Id, string AccountName, string Username, string Password, string Tags)> allAccounts = new List<(int, string, string, string, string)>();
 
 
-        public void DisplayAccounts(List<(int Id, string AccountName, string Username, string Password)> accounts)
+        public void DisplayAccounts(List<(int Id, string AccountName, string Username, string Password, string Tags)> accounts)
         {
             flowLayoutPanel1.Controls.Clear();
-            
+
             foreach (var account in accounts)
             {
-                var card = new AccountCardControl(account.Id, account.AccountName, account.Username, account.Password);
+                var card = new AccountCardControl(account.Id, account.AccountName, account.Username, account.Password, account.Tags);
                 card.AccountClicked += OnAccountCardClicked;
                 flowLayoutPanel1.Controls.Add(card);
             }
@@ -44,6 +46,14 @@ namespace passmng
             {
                 LoadUserAccounts();
             }
+            comboSort.Items.AddRange(new string[]
+            {
+                "Default",
+                "Alphabetical (A → Z)",
+                "Reverse alphabetical (Z → A)",
+                "Newest first"
+             });
+            comboSort.SelectedIndex = 0;
         }
 
         private void buttonAddAccount_Click(object sender, EventArgs e)
@@ -55,11 +65,12 @@ namespace passmng
                     string accountName = addForm.AccountName;
                     string username = addForm.Username;
                     string password = addForm.Password;
+                    string tags = addForm.Tags;
 
                     string master = Cryptography.SecureStringToString(Session.masterPassword);
-                    DatabaseHelper.AddAccount(Session.CurrentUserId.Value, accountName, username, password, master);
+                    DatabaseHelper.AddAccount(Session.CurrentUserId.Value, accountName, username, password, tags, master);
 
-                    AccountCardControl newCard = new AccountCardControl(Session.CurrentUserId.Value, accountName, username, password);
+                    AccountCardControl newCard = new AccountCardControl(Session.CurrentUserId.Value, accountName, username, password, tags);
                     LoadUserAccounts();
                 }
             }
@@ -67,15 +78,14 @@ namespace passmng
 
         public void LoadUserAccounts()
         {
-            flowLayoutPanel1.Controls.Clear();
-
             if (!Session.CurrentUserId.HasValue)
                 return;
 
             string master = Cryptography.SecureStringToString(Session.masterPassword);
             allAccounts = DatabaseHelper.LoadAccounts(Session.CurrentUserId.Value, master);
 
-            DisplayAccounts(allAccounts);
+            
+            ApplySorting();
         }
 
         private void OnAccountCardClicked(object sender, EventArgs e)
@@ -85,7 +95,7 @@ namespace passmng
 
             string master = Cryptography.SecureStringToString(Session.masterPassword);
 
-            using (var detailsForm = new AccountDetailsForm(card.AccountId, card.AccountName, card.Username, card.Password, master))
+            using (var detailsForm = new AccountDetailsForm(card.AccountId, card.AccountName, card.Username, card.Password, card.Tags, master))
             {
                 detailsForm.AccountUpdated += DetailsForm_AccountUpdated;
                 detailsForm.ShowDialog();
@@ -149,7 +159,7 @@ namespace passmng
             string search = textBoxSearch.Text.Trim();
             if (string.IsNullOrEmpty(search))
             {
-                DisplayAccounts(allAccounts);
+                ApplySorting();
                 return;
             }
 
@@ -157,22 +167,107 @@ namespace passmng
                 .Select(acc => new
                 {
                     Account = acc,
-                    Score = Math.Max(
+                    Score = Math.Max
+                    (
                         Fuzz.PartialRatio(search, acc.AccountName),
-                        Fuzz.PartialRatio(search, acc.Username)
-                        )
+                        Math.Max
+                            (
+                            Fuzz.PartialRatio(search, acc.Username),
+                            Fuzz.PartialRatio(search, acc.Tags)
+                            )
+                    )
                 })
                 .Where(x => x.Score > 60)
                 .OrderByDescending(x => x.Score)
                 .Select(x => x.Account)
                 .ToList();
-            DisplayAccounts(filtered);
+            ApplySortingToList(filtered);
+        }
+
+        private void ApplySorting()
+        {
+            if (allAccounts == null || allAccounts.Count == 0)
+                return;
+
+            List<(int Id, string AccountName, string Username, string Password, string Tags)> sorted;
+
+            switch (comboSort.SelectedItem?.ToString())
+            {
+                case "Alphabetical (A → Z)":
+                    sorted = allAccounts
+                        .OrderBy(a => a.AccountName.ToLower())
+                        .ToList();
+                    break;
+
+                case "Reverse alphabetical (Z → A)":
+                    sorted = allAccounts
+                        .OrderByDescending(a => a.AccountName.ToLower())
+                        .ToList();
+                    break;
+
+                case "Newest first":
+                    sorted = allAccounts
+                        .OrderByDescending(a => a.Id)
+                        .ToList();
+                    break;
+
+                case "Default":
+                default:
+                    sorted = allAccounts;
+                    break;
+            }
+
+            DisplayAccounts(sorted);   
+        }
+
+        private void ApplySortingToList(List<(int Id, string AccountName, string Username, string Password, string Tags)> list)
+        {
+            if (list == null || list.Count == 0)
+            {
+                DisplayAccounts(list);
+                return;
+            }
+
+      
+            var sorted = list.ToList();
+
+            switch (comboSort.SelectedItem?.ToString())
+            {
+                case "Alphabetical (A → Z)":
+                    sorted = sorted
+                        .OrderBy(a => a.AccountName.ToLower())
+                        .ToList();
+                    break;
+
+                case "Reverse Alphabetical (Z→A)":
+                    sorted = sorted
+                        .OrderByDescending(a => a.AccountName.ToLower())
+                        .ToList();
+                    break;
+
+                case "Newest first":
+                    sorted = sorted
+                        .OrderByDescending(a => a.Id)
+                        .ToList();
+                    break;
+
+                case "Default":
+                default:
+                    break;
+            }
+
+            DisplayAccounts(sorted);
         }
 
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
             searchAccounts();
 
+        }
+
+        private void comboSort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplySorting();
         }
     }
 }

@@ -35,19 +35,10 @@
             buttonHIBP = new Button();
             buttonLogout = new Button();
             textBoxSearch = new TextBox();
+            comboSort = new ComboBox();
             buttonAddAccount = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(251, 81);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(952, 548);
-            flowLayoutPanel1.TabIndex = 0;
-            flowLayoutPanel1.WrapContents = false;
             // 
             // buttonAddAccount
             // 
@@ -66,12 +57,22 @@
             buttonAddAccount.UseVisualStyleBackColor = false;
             buttonAddAccount.Click += buttonAddAccount_Click;
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel1.Location = new Point(251, 81);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(952, 548);
+            flowLayoutPanel1.TabIndex = 0;
+            flowLayoutPanel1.WrapContents = false;
+            // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(0, -53);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(242, 182);
+            pictureBox2.Size = new Size(245, 196);
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
             // 
@@ -81,9 +82,9 @@
             buttonHIBP.FlatStyle = FlatStyle.Flat;
             buttonHIBP.ForeColor = Color.FromArgb(19, 22, 26);
             buttonHIBP.Image = (Image)resources.GetObject("buttonHIBP.Image");
-            buttonHIBP.Location = new Point(0, 259);
+            buttonHIBP.Location = new Point(3, 259);
             buttonHIBP.Name = "buttonHIBP";
-            buttonHIBP.Size = new Size(245, 105);
+            buttonHIBP.Size = new Size(242, 105);
             buttonHIBP.TabIndex = 0;
             buttonHIBP.UseVisualStyleBackColor = true;
             buttonHIBP.Click += buttonHIBP_Click;
@@ -106,13 +107,26 @@
             textBoxSearch.Location = new Point(737, 22);
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.PlaceholderText = "🔎 Search ";
+            textBoxSearch.RightToLeft = RightToLeft.No;
             textBoxSearch.Size = new Size(292, 23);
             textBoxSearch.TabIndex = 3;
             textBoxSearch.TextChanged += textBoxSearch_TextChanged;
             // 
+            // comboSort
+            // 
+            comboSort.FormattingEnabled = true;
+            comboSort.Location = new Point(543, 22);
+            comboSort.Name = "comboSort";
+            comboSort.RightToLeft = RightToLeft.No;
+            comboSort.Size = new Size(168, 23);
+            comboSort.TabIndex = 4;
+            comboSort.Text = "Sorting";
+            comboSort.SelectedIndexChanged += comboSort_SelectedIndexChanged;
+            // 
             // CryptifyAppControl
             // 
             BackColor = Color.FromArgb(19, 22, 26);
+            Controls.Add(comboSort);
             Controls.Add(buttonAddAccount);
             Controls.Add(textBoxSearch);
             Controls.Add(buttonLogout);
@@ -141,5 +155,6 @@
         private Button buttonHIBP;
         private Button buttonLogout;
         private TextBox textBoxSearch;
+        private ComboBox comboSort;
     }
 }

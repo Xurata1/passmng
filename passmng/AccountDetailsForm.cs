@@ -17,17 +17,36 @@ namespace passmng
         private bool showPassword = false;
         public event EventHandler AccountUpdated;
 
-        public AccountDetailsForm(int accountId, string accountName, string username, string password, string masterPassword)
+        public AccountDetailsForm(int accountId, string accountName, string username, string password, string tags, string masterPassword)
         {
             InitializeComponent();
             this.accountId = accountId;
             this.masterPassword = masterPassword;
 
+            comboBoxTags.DropDownStyle = ComboBoxStyle.DropDown;
+            comboBoxTags.Items.AddRange
+            (
+                new string[]
+                {
+                    "Email",
+                    "Social",
+                    "Banking",
+                    "Shopping",
+                    "Gaming",
+                    "Work",
+                    "School",
+                    "Finance",
+                    "Utilities",
+                    "Other"
+                }
+            );
 
             txtAccountName.Text = accountName;
             txtUsername.Text = username;
             txtPassword.Text = password;
             txtPassword.UseSystemPasswordChar = true;
+            comboBoxTags.SelectedItem = tags;
+            
         }
 
         private void buttonTogglePassword_Click(object sender, EventArgs e)
@@ -50,9 +69,11 @@ namespace passmng
         {
             string newAccountName = txtAccountName.Text;
             string newUsername = txtUsername.Text;
+            string newTags = comboBoxTags.SelectedItem?.ToString() ?? "Other";
             string newPassword = txtPassword.Text;
+            
 
-            DatabaseHelper.UpdateAccount(accountId, newAccountName, newUsername, newPassword, masterPassword);
+            DatabaseHelper.UpdateAccount(accountId, newAccountName, newUsername, newPassword, newTags, masterPassword);
 
             AccountUpdated?.Invoke(this, EventArgs.Empty);
             MessageBox.Show("Account updated!");

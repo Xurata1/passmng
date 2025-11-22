@@ -48,5 +48,22 @@ namespace passmng
             panelContainer.Controls.Add(control);
         }
 
+        public void ShowSignUpPage()
+        {
+            var signUp = new SignUpControl();
+            signUp.Dock = DockStyle.Fill;
+
+            signUp.AccountCreated += () =>
+            {
+                ShowLoginPage();
+            };
+            
+            signUp.BackRequested += () =>
+            {
+                ShowLoginPage(); 
+            };
+
+            LoadScreen(signUp);
+        }
     }
 }

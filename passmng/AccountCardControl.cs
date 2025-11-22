@@ -16,11 +16,15 @@ namespace passmng
         private string accountName;
         private string username;
         private string password;
+        private string tags;
         private int accountId;
+       
 
         public string AccountName { get { return accountName; } }
         public string Username { get { return username; } }
         public string Password { get { return password; } }
+        
+        public string Tags { get { return tags;  } }
 
         public int AccountId { get { return accountId; } }
 
@@ -28,7 +32,7 @@ namespace passmng
 
         public event EventHandler AccountClicked;
 
-        public AccountCardControl(int accountId, string accountName, string username, string password)
+        public AccountCardControl(int accountId, string accountName, string username, string password, string tags)
         {
             InitializeComponent();
 
@@ -36,6 +40,7 @@ namespace passmng
             this.accountName = accountName;
             this.username = username;
             this.password = password;
+            this.tags = tags;
 
             labelaccountName.Text = accountName;
             labelUsername.Text = username;
